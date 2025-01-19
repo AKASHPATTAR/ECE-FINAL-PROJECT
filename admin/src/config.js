@@ -1,5 +1,5 @@
 const config = {
-    API_BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:4000'
+    API_BASE_URL: 'https://ece-final-project.onrender.com'  // Backend is working correctly
 };
 
 export default config;

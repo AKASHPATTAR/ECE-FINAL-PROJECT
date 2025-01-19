@@ -13,15 +13,7 @@ const port = process.env.PORT || 4000;
 
 // middlewares
 app.use(express.json())
-app.use(cors({
-    origin: [
-        'https://your-customer-frontend.vercel.app',  // Customer frontend
-        'https://your-admin-frontend.vercel.app',     // Admin frontend
-        'http://localhost:5173',                      // Local customer frontend
-        'http://localhost:5174'                       // Local admin frontend
-    ],
-    credentials: true
-}))
+app.use(cors())  // Allow all origins during development
 
 // db connection
 connectDB()
