@@ -4,8 +4,9 @@ import order_icon from './order_icon.png'
 import profile_image from './profile_image.png'
 import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.png'
+import config from '../config'
 
-export const url = 'http://localhost:4000'
+export const url = config.API_BASE_URL
 export const currency = '₹'
 
 export const assets ={
@@ -16,4 +17,3 @@ export const assets ={
     upload_area,
     parcel_icon
 }
-
