@@ -24,23 +24,37 @@ const LoginPopup = ({ setShowLogin }) => {
 
     const onLogin = async (e) => {
         e.preventDefault()
-
-        let new_url = url;
-        if (currState === "Login") {
-            new_url += "/api/user/login";
-        }
-        else {
-            new_url += "/api/user/register"
-        }
-        const response = await axios.post(new_url, data);
-        if (response.data.success) {
-            setToken(response.data.token)
-            localStorage.setItem("token", response.data.token)
-            loadCartData({token:response.data.token})
-            setShowLogin(false)
-        }
-        else {
-            toast.error(response.data.message)
+        try {
+            let new_url = url;
+            if (currState === "Login") {
+                new_url += "/api/user/login";
+            }
+            else {
+                new_url += "/api/user/register"
+            }
+            console.log('Making request to:', new_url);
+            
+            const response = await axios.post(new_url, data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            console.log('Response:', response.data);
+            
+            if (response.data.success) {
+                setToken(response.data.token)
+                localStorage.setItem("token", response.data.token)
+                loadCartData({token:response.data.token})
+                setShowLogin(false)
+                toast.success(currState === "Login" ? "Login successful!" : "Registration successful!")
+            }
+            else {
+                toast.error(response.data.message || "An error occurred")
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error(error.response?.data?.message || "Network error occurred")
         }
     }
 

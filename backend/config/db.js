@@ -4,13 +4,12 @@
 //     await mongoose.connect('').then(()=>console.log("DB Connected"));
 // }
 
-
-
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://viveklokannavar5058:123456viv@cluster0.6sdhs.mongodb.net/restMenu', {
+        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://viveklokannavar5058:123456viv@cluster0.6sdhs.mongodb.net/restMenu';
+        await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
